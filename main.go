@@ -21,21 +21,17 @@ func newTemplate() *Templates {
 	}
 }
 
-type Count struct {
-	Count int
-}
-
 func main() {
 	e := echo.New()
 	e.Use(middleware.Logger())
-
-	count := Count{Count: 0}
-	e.Renderer = NewTemplate()
+	e.Renderer = newTemplate()
 
 	e.GET("/", func(c echo.Context) error {
-		count.Count++
-		return c.Render(200, "index.html", count)
+		return c.Render(http.StatusOK, "index.html", nil)
 	})
-
-	e.Logger.Fatal(e.Start(":42069"))
+	e.POST("/fill", func(c echo.Context) error {
+	//	data := c.FormValue("data")
+		return c.Render(http.StatusOK, "index.html",nil)
+	})
+	e.Logger.Fatal(e.Start(":8080"))
 }

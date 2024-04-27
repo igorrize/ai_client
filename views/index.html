@@ -1,0 +1,9 @@
+<h3>Add data</h3>
+<form hx-post="/contact">
+  <div hx-target="this" hx-swap="outerHTML">
+    <label>Put your data</label>
+    <input name="data" hx-post="/data" hx-indicator="#ind">
+  </div>
+  <button class="btn btn-default">Submit</button>
+</form>
+
