@@ -24,6 +24,7 @@ func newTemplate() *Templates {
 func main() {
 	e := echo.New()
 	e.Use(middleware.Logger())
+
 	e.Renderer = newTemplate()
 
 	e.GET("/", func(c echo.Context) error {
