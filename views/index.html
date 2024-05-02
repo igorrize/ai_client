@@ -10,12 +10,13 @@
 <body>
   <h3>Add data</h3>
   
-<form hx-post="/fill">
-    <div class="input-group input-group-lg" hx-target="#data" hx-swap="outerHTML focus-scroll:true">
+    <form>
+      <div class="input-group input-group-lg">
       <span class="input-group-text">Your data</span>
-        <textarea class="form-control" id="data" aria-label="With textarea"></textarea>
+        <textarea class="form-control" aria-label="With textarea" name="data"></textarea>
       </div>
-    <button class="btn btn-primary">Submit</button> 
+    <button class="btn btn-primary" hx-post="/fill" hx-target="#data">Submit</button> 
+      <div id="data">{{ .data }}</div>
     </form>
 </body>
 </html>
