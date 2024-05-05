@@ -30,8 +30,10 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "index.html", nil)
 	})
+
 	e.POST("/fill", func(c echo.Context) error {
 		data := c.FormValue("data")
+
 		return c.Render(http.StatusOK, "data.html", map[string]interface{}{"data":string(data)})
 	})
 	e.Logger.Fatal(e.Start(":8080"))
