@@ -1,11 +1,14 @@
 package main
 
 import (
+	"github.com/igorrize/ai_client/services"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"html/template"
 	"io"
 	"net/http"
+	"strings"
+  "os"
 )
 
 type Templates struct {
@@ -33,8 +36,14 @@ func main() {
 
 	e.POST("/fill", func(c echo.Context) error {
 		data := c.FormValue("data")
+    cohereApiKey := os.Getenv("COHEREAPI")
+		es := services.NewCohereEmbeddingService(cohereApiKey)
+		embeddings, err := es.CreateEmbedding(strings.Fields(data))
+		if err != nil {
+			return err
+		}
 
-		return c.Render(http.StatusOK, "data.html", map[string]interface{}{"data":string(data)})
+		return c.Render(http.StatusOK, "data.html", map[string]interface{}{"embeddings": embeddings})
 	})
 	e.Logger.Fatal(e.Start(":8080"))
 }

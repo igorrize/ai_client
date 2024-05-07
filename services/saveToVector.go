@@ -3,8 +3,6 @@ package services
 import (
 	"context"
 	"flag"
-	"log"
-	"time"
 
 	pb "github.com/qdrant/go-client/qdrant"
 	"google.golang.org/grpc"
