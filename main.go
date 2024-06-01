@@ -59,7 +59,7 @@ func main() {
 		results := make(chan vectorWithPayload)
 		for _, chunk := range chunks {
 			wg.Add(1)
-			go func(n []string) {
+			go func(chunk []string) {
 				defer wg.Done()
 
 				embeddings, err := es.CreateEmbedding(chunk)

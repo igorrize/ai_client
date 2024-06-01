@@ -3,6 +3,7 @@ package services
 import (
 	"context"
 	"flag"
+	"github.com/google/uuid"
 	pb "github.com/qdrant/go-client/qdrant"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -64,7 +65,7 @@ func (s *qdrantServiceImpl) UpsertPoints(collectionName string, waitUpserts bool
 	for i, payloadString := range payload {
 		point := &pb.PointStruct{
 			Id: &pb.PointId{
-				PointIdOptions: &pb.PointId_Num{Num: 1},
+				PointIdOptions: &pb.PointId_Uuid{Uuid: uuid.New().String()},
 			},
 			Vectors: &pb.Vectors{VectorsOptions: &pb.Vectors_Vector{Vector: &pb.Vector{Data: points[i]}}},
 			Payload: map[string]*pb.Value{"text": {Kind: &pb.Value_StringValue{StringValue: payloadString}}}}
